@@ -1,9 +1,49 @@
 services:
-  db:
+  sqld:
     image: ghcr.io/tursodatabase/libsql-server:latest
-    ports:
-      - "8080:8080"
     volumes:
-      - ./tmp/data/libsql:/var/lib/sqld
+      - sqld-data:/var/lib/sqld
+    networks:
+      - internal
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    depends_on:
+      - sqld
     environment:
-      - SQLD_NODE=primary
+      - DATABASE_URL=http://sqld:8080
+      - DATABASE_AUTH_TOKEN=dummy-token-for-local
+      - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
+      - BETTER_AUTH_URL=https://stack-api.colmena.dev
+      - CORS_ORIGIN=https://stack.colmena.dev
+      - NODE_ENV=production
+      - GOOGLE_GENERATIVE_AI_API_KEY=${GOOGLE_GENERATIVE_AI_API_KEY}
+      - SOLANA_RPC_URL=https://api.devnet.solana.com
+    networks:
+      - internal
+      - dokploy-network
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+      args:
+        - VITE_SERVER_URL=https://stack-api.colmena.dev
+    depends_on:
+      - server
+    environment:
+      - NODE_ENV=production
+    networks:
+      - internal
+      - dokploy-network
+
+volumes:
+  sqld-data:
+
+networks:
+  internal:
+    driver: bridge
+  dokploy-network:
+    external: true
