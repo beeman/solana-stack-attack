@@ -138,7 +138,7 @@ Don't use relative paths like `../` to reference files outside the package. Use 
 
 **DO NOT create Root Tasks. ALWAYS create package tasks.**
 
-When you need to create a task (build, lint, test, typecheck, etc.):
+When you need to create a task (build, lint, test, check-types, etc.):
 
 1. Add the script to **each relevant package's** `package.json`
 2. Register the task in root `turbo.json`

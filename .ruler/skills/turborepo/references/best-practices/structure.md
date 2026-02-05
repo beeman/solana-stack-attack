@@ -59,7 +59,7 @@ Key points:
     "build": "next build",
     "lint": "eslint .",
     "test": "vitest",
-    "typecheck": "tsc --noEmit"
+    "check-types": "tsc --noEmit"
   }
 }
 
@@ -69,7 +69,7 @@ Key points:
     "build": "tsc",
     "lint": "eslint .",
     "test": "vitest",
-    "typecheck": "tsc --noEmit"
+    "check-types": "tsc --noEmit"
   }
 }
 ```

@@ -73,7 +73,7 @@ Glob patterns for files to cache. **If omitted, nothing is cached.**
 // TypeScript (tsc)
 "outputs": ["dist/**", "*.tsbuildinfo"]
 
-// No file outputs (lint, typecheck)
+// No file outputs (lint, check-types)
 "outputs": []
 ```
 

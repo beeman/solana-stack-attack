@@ -543,7 +543,7 @@ When `incremental: true` in tsconfig.json, `tsc --noEmit` writes `.tsbuildinfo` 
 // If tsconfig has incremental: true, tsc --noEmit produces cache files
 {
   "tasks": {
-    "typecheck": {
+    "check-types": {
       "outputs": ["node_modules/.cache/tsbuildinfo.json"] // or wherever tsBuildInfoFile points
     }
   }

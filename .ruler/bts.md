@@ -26,7 +26,7 @@ This is a monorepo with the following structure:
 - `bun run dev:native` - Start only the native app
 - `bun run build` - Build all apps
 - `bun run lint` - Lint all packages
-- `bun run typecheck` - Type check all packages
+- `bun run check-types` - Type check all packages
 
 ## Database Commands
 
@@ -68,3 +68,10 @@ This project includes a `bts.jsonc` configuration file that stores your Better-T
 - Run workspace-specific commands with `bun run command-name`
 - Turborepo handles build caching and parallel execution
 - Git hooks are configured with Lefthook for pre-commit checks
+
+## Agent Behavioral Rules
+
+- **Strict Adherence to Instructions:** Always use the specific hooks, functions, or tools requested by the user (e.g., if asked to use `signIn` from `useMobileWallet`, do not use `transact` instead).
+- **No Autonomous Deviations:** Never take an alternative implementation path ("freewheeling") even if a technical limitation or "better" way is perceived.
+- **Proactive Clarification:** If a requested instruction seems technically impossible, problematic, or if critical info is missing, STOP immediately and ask for clarification or guidance.
+- **You are NOT the Boss:** Stick strictly to what is asked. Do not tweak or refactor unrelated code unless explicitly requested.
