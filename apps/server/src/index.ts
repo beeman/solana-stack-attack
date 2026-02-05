@@ -1,4 +1,3 @@
-import { devToolsMiddleware } from '@ai-sdk/devtools'
 import { google } from '@ai-sdk/google'
 import { OpenAPIHandler } from '@orpc/openapi/fetch'
 import { OpenAPIReferencePlugin } from '@orpc/openapi/plugins'
@@ -9,7 +8,7 @@ import { createContext } from '@solana-stack-attack/api/context'
 import { appRouter } from '@solana-stack-attack/api/routers/index'
 import { auth } from '@solana-stack-attack/auth'
 import { env } from '@solana-stack-attack/env/server'
-import { convertToModelMessages, streamText, wrapLanguageModel } from 'ai'
+import { convertToModelMessages, streamText } from 'ai'
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { logger } from 'hono/logger'
@@ -77,12 +76,8 @@ app.use('/*', async (c, next) => {
 app.post('/ai', async (c) => {
   const body = await c.req.json()
   const uiMessages = body.messages || []
-  const model = wrapLanguageModel({
-    model: google('gemini-2.5-flash'),
-    middleware: devToolsMiddleware(),
-  })
   const result = streamText({
-    model,
+    model: google('gemini-2.5-flash'),
     messages: await convertToModelMessages(uiMessages),
   })
 
