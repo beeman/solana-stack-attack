@@ -15,14 +15,16 @@ services:
     depends_on:
       - sqld
     environment:
-      - DATABASE_URL=http://sqld:8080
-      - DATABASE_AUTH_TOKEN=dummy-token-for-local
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
       - BETTER_AUTH_URL=https://stack-api.colmena.dev
-      - CORS_ORIGIN=https://stack.colmena.dev
-      - NODE_ENV=production
+      - CORS_ORIGINS=https://stack.colmena.dev,solana-stack-attack://
+      - DATABASE_AUTH_TOKEN=dummy-token-for-local
+      - DATABASE_URL=http://sqld:8080
+      - FEE_PAYER_KEYPAIR=${FEE_PAYER_KEYPAIR}
       - GOOGLE_GENERATIVE_AI_API_KEY=${GOOGLE_GENERATIVE_AI_API_KEY}
+      - NODE_ENV=production
       - SOLANA_RPC_URL=https://api.devnet.solana.com
+      - TOKEN_MINT_ADDRESS=8KLh3dLFgCKVkcQpgQep6e2d678uE49VdLpRcyDCWaxV
     networks:
       - internal
       - dokploy-network
@@ -36,12 +38,12 @@ services:
     depends_on:
       - server
     environment:
-      - NODE_ENV=production
-      - DATABASE_URL=http://sqld:8080
-      - DATABASE_AUTH_TOKEN=dummy-token-for-local
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
       - BETTER_AUTH_URL=https://stack-api.colmena.dev
-      - CORS_ORIGIN=https://stack.colmena.dev
+      - CORS_ORIGINS=https://stack.colmena.dev,solana-stack-attack://
+      - DATABASE_AUTH_TOKEN=dummy-token-for-local
+      - DATABASE_URL=http://sqld:8080
+      - NODE_ENV=production
       - VITE_SERVER_URL=https://stack-api.colmena.dev
     networks:
       - internal
