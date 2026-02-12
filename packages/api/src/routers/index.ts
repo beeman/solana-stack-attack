@@ -1,6 +1,7 @@
 import type { RouterClient } from '@orpc/server'
 import { gameRouter } from '../features/game'
 import { protectedProcedure, publicProcedure } from '../index'
+import { feePayerRouter } from './fee-payer'
 import { solanaRouter } from './solana'
 import { todoRouter } from './todo'
 
@@ -14,6 +15,7 @@ export const appRouter = {
       user: context.session?.user,
     }
   }),
+  feePayer: feePayerRouter,
   game: gameRouter,
   todo: todoRouter,
   solana: solanaRouter,
