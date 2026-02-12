@@ -13,6 +13,7 @@ import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import {
   appendTransactionMessageInstructions,
+  assertIsTransactionWithBlockhashLifetime,
   createKeyPairSignerFromBytes,
   createSolanaRpc,
   createSolanaRpcSubscriptions,
@@ -165,7 +166,7 @@ async function main() {
   console.log('\nSigning and sending transaction...')
   const signedTransaction =
     await signTransactionMessageWithSigners(transactionMessage)
-
+  assertIsTransactionWithBlockhashLifetime(signedTransaction)
   await sendAndConfirmTransactionFactory({ rpc, rpcSubscriptions })(
     signedTransaction,
     { commitment: 'confirmed', skipPreflight: true },
@@ -218,7 +219,7 @@ async function main() {
 
   const signedMintSupply =
     await signTransactionMessageWithSigners(mintSupplyMessage)
-
+  assertIsTransactionWithBlockhashLifetime(signedMintSupply)
   await sendAndConfirmTransactionFactory({ rpc, rpcSubscriptions })(
     signedMintSupply,
     { commitment: 'confirmed', skipPreflight: true },
