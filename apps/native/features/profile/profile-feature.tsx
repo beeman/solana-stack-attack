@@ -10,6 +10,7 @@ import {
 } from '@/features/auth/data-access/auth-client'
 import { queryClient } from '@/features/core/util/core-orpc'
 import { useGameContext } from '@/features/game/data-access/game-provider'
+import { RewardsFeature } from '@/features/rewards/rewards-feature'
 import { solanaEllipsify } from '@/features/solana/util/solana-ellipsify'
 import { UiContainer } from '@/features/ui/ui/ui-container'
 import { UiThemeToggle } from '@/features/ui/ui/ui-theme-toggle'
@@ -102,6 +103,14 @@ export function ProfileFeature() {
             value={`+${state.pointsPerSecond}`}
             icon="time"
           />
+        </View>
+
+        {/* Rewards */}
+        <Text className="mb-3 font-semibold text-foreground text-lg">
+          Rewards
+        </Text>
+        <View className="mb-6">
+          <RewardsFeature />
         </View>
 
         {/* Settings */}
